@@ -6,7 +6,7 @@ namespace MyApp
     {
         static void Main(string[] args)
         {
-            using (Game game = new(800, 600, "test"))
+            using (GameTest game = new(800, 600, "test"))
             {
                 game.Run();
             }

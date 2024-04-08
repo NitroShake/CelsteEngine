@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CelsteEngine
 {
-    internal class Shader : IDisposable
+    public class Shader : IDisposable
     {
         int handle;
 
