@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace CelsteEngine
 {
-    public class Camera : Node
+    public class Camera : Node3D
     {
-        public Camera(Vector3 position, Vector3 rotation, bool inheritTransform, List<Node> children, Node? parent, float aspectRatio, bool startActive)
-            : base(position, rotation, inheritTransform, children, parent)
+        public Camera(Vector3 position, Vector3 rotation, Vector3 scale, bool inheritTransform, List<Node> children, Node? parent, float aspectRatio, bool startActive)
+            : base(position, rotation, scale, inheritTransform, children, parent)
         {
             this.aspectRatio = aspectRatio;
             this.isActive = startActive;

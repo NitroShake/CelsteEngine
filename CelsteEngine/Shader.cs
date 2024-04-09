@@ -47,6 +47,11 @@ namespace CelsteEngine
             GL.UseProgram(handle);
         }
 
+        public int getAttributeLocation(string attributeName)
+        {
+            return GL.GetAttribLocation(handle, attributeName);
+        }
+
         public Shader(string vertexPath, string fragmentPath)
         {
             //read and create shaders

@@ -7,14 +7,11 @@ using System.Threading.Tasks;
 
 namespace CelsteEngine
 {
-    public abstract class Node
+    public class Node
     {
-        public Node(Vector3 position, Vector3 rotation, bool inheritTransform, List<Node> children, Node? parent)
+        public Node(List<Node> children, Node? parent)
         {
             load();
-            this.position = position;
-            this.rotation = rotation;
-            this.inheritTransform = inheritTransform;
             this.children = children;
             this.parent = parent;
             if (parent != null)
@@ -22,9 +19,6 @@ namespace CelsteEngine
                 parent.addChild(this);
             }
         }
-        public Vector3 position;
-        public Vector3 rotation;
-        bool inheritTransform;
         public Node? parent;
         public List<Node> children;
 
@@ -40,7 +34,18 @@ namespace CelsteEngine
         public virtual void onUpdate(double deltaTime) { }
         public virtual void load() { }
 
-        public virtual void addChild(Node node) { }
+        public virtual void addChild(Node node) 
+        {
+            if (node.parent != null)
+            {
+                throw new InvalidOperationException("Node already has a parent! Use removeChild(node) first");
+            }
+            else
+            {
+                node.parent = this;
+                children.Add(node);
+            }
+        }
 
 
         /// <summary>
@@ -49,22 +54,26 @@ namespace CelsteEngine
         /// <param name="node"></param>
         public void removeChild(Node node)
         {
-            children.Remove(node);
+            if (children.Remove(node))
+            {
+                node.parent = null;
+            }
         }
 
         /// <summary>
         /// Unloads the object, performing any 
         /// </summary>
-        internal virtual void dispose() 
+        internal virtual void dispose()
         {
             if (parent != null)
             {
                 parent.removeChild(this);
             }
-            onDispose();
+            List<Node> list = new List<Node>(children.ToList());
+            foreach(Node child in list)
+            {
+                child.dispose();
+            }
         }
-
-        public virtual void onDispose() { }
-
     }
 }
