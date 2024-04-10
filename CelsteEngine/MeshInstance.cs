@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CelsteEngine
 {
-    public class MeshInstance3D : VisualNode
+    public class MeshInstance : VisualNode
     {
         Mesh mesh;
         Shader shader;
@@ -17,7 +17,7 @@ namespace CelsteEngine
         int vbo;
         int ebo;
 
-        public MeshInstance3D(Vector3 position, Vector3 rotation, Vector3 scale, bool inheritTransform, List<Node> children, Node? parent, Color4 color) : base(position, rotation, scale, inheritTransform, children, parent)
+        public MeshInstance(Vector3 position, Vector3 rotation, Vector3 scale, bool inheritTransform, List<Node> children, Node? parent, Color4 color) : base(position, rotation, scale, inheritTransform, children, parent)
         {
             this.color = color;
             mesh = loadMesh();
@@ -43,27 +43,22 @@ namespace CelsteEngine
         internal override void draw()
         {
             GL.Uniform4(GL.GetUniformLocation(shader.getHandle(), "color"), color);
+            var model = Matrix4.Identity;
+            shader.SetMatrix4("model", model);
+            shader.SetMatrix4("view", NodeManager.activeCamera.GetViewMatrix());
+            shader.SetMatrix4("projection", NodeManager.activeCamera.GetProjectionMatrix());
             GL.BindVertexArray(vao);
             GL.DrawElements(PrimitiveType.Triangles, mesh.indices.Length, DrawElementsType.UnsignedInt, 0);
         }
 
         Mesh loadMesh()
         {
-            //return new Mesh(new float[] {0.5f,  0.5f, 0.0f, // top right
-            // 0.5f, -0.5f, 0.0f, // bottom right
-            //-0.5f, -0.5f, 0.0f, // bottom left
-            //-0.5f,  0.5f, 0.0f,}, new uint[] {0, 1, 3,
-            //1, 2, 3});
-
             return AssetManager.loadMesh("testassets/testcube.obj");
-
         }
 
         Shader loadShader()
         {
             return new Shader("testassets/shader.vert", "testassets/shader.frag");
         }
-
-
     }
 }

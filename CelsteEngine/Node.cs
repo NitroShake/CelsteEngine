@@ -12,15 +12,18 @@ namespace CelsteEngine
         public Node(List<Node> children, Node? parent)
         {
             load();
-            this.children = children;
             this.parent = parent;
             if (parent != null)
             {
                 parent.addChild(this);
             }
+            foreach (var child in children)
+            {
+                addChild(child);
+            }
         }
         public Node? parent;
-        public List<Node> children;
+        public List<Node> children = new();
 
         internal void update(double deltaTime)
         {

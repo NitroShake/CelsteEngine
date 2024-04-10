@@ -13,7 +13,7 @@ namespace CelsteEngine
     {
         public CelsteGame(int width, int height, string title) : base(GameWindowSettings.Default, new NativeWindowSettings() { Size = (width, height), Title = title }) 
         {
-            
+            NodeManager.game = this;
         }
 
         protected override void OnLoad()

@@ -59,7 +59,7 @@ namespace CelsteEngine
                     for (int i = 1; i < splitLine.Length; i++)
                     {
                         string splitArg = splitLine[i].Split('/')[0];
-                        indices.Add(uint.Parse(splitArg));
+                        indices.Add(uint.Parse(splitArg) - 1);
                     }
                 }
             }

@@ -1,4 +1,5 @@
 ﻿using OpenTK.Graphics.OpenGL4;
+using OpenTK.Mathematics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -50,6 +51,12 @@ namespace CelsteEngine
         public int getAttributeLocation(string attributeName)
         {
             return GL.GetAttribLocation(handle, attributeName);
+        }
+
+        public void SetMatrix4(string name, Matrix4 data)
+        {
+            GL.UseProgram(handle);
+            GL.UniformMatrix4(GL.GetUniformLocation(handle, name), true, ref data);
         }
 
         public Shader(string vertexPath, string fragmentPath)
