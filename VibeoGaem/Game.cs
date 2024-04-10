@@ -16,7 +16,7 @@ namespace VibeoGaem
 
         protected override void OnLoad()
         {
-            NodeManager.masterNode = new MeshInstance3D(new Vector3(0, 0, 0), new Vector3(0, 0, 0), new Vector3(0, 0, 0), false, 
+            NodeManager.masterNode = new MeshInstance(new Vector3(0, 0, 0), new Vector3(0, 0, 0), new Vector3(0, 0, 0), false, 
             new Node[]
             {
                 //new MeshInstance3D(new Vector3(1, 0, 0), new Vector3(0, 0, 0), new Vector3(0, 0, 0), false, new List<Node>(), null, new Color4(111,3,3,255) ), 
