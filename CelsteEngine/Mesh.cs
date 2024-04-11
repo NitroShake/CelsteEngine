@@ -14,6 +14,8 @@ namespace CelsteEngine
             this.indices = indices;
         }
 
+
+
         public float[] vertices;
         public uint[] indices;
     }

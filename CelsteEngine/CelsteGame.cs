@@ -14,6 +14,7 @@ namespace CelsteEngine
         public CelsteGame(int width, int height, string title) : base(GameWindowSettings.Default, new NativeWindowSettings() { Size = (width, height), Title = title }) 
         {
             NodeManager.game = this;
+            VSync = VSyncMode.On;
         }
 
         protected override void OnLoad()

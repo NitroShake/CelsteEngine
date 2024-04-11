@@ -17,10 +17,10 @@ namespace CelsteEngine
         int vbo;
         int ebo;
 
-        public MeshInstance(Vector3 position, Vector3 rotation, Vector3 scale, bool inheritTransform, List<Node> children, Node? parent, Color4 color) : base(position, rotation, scale, inheritTransform, children, parent)
+        public MeshInstance(string meshDir, Vector3 position, Vector3 rotation, Vector3 scale, bool inheritTransform, List<Node> children, Node? parent, Color4 color) : base(position, rotation, scale, inheritTransform, children, parent)
         {
             this.color = color;
-            mesh = loadMesh();
+            mesh = loadMesh(meshDir);
             vao = GL.GenVertexArray();
             vbo = GL.GenBuffer();
             ebo = GL.GenBuffer();
@@ -42,18 +42,18 @@ namespace CelsteEngine
 
         internal override void draw()
         {
-            GL.Uniform4(GL.GetUniformLocation(shader.getHandle(), "color"), color);
+            GL.BindVertexArray(vao);
             var model = Matrix4.Identity;
             shader.SetMatrix4("model", model);
             shader.SetMatrix4("view", NodeManager.activeCamera.GetViewMatrix());
             shader.SetMatrix4("projection", NodeManager.activeCamera.GetProjectionMatrix());
-            GL.BindVertexArray(vao);
+            GL.Uniform4(GL.GetUniformLocation(shader.getHandle(), "color"), color);
             GL.DrawElements(PrimitiveType.Triangles, mesh.indices.Length, DrawElementsType.UnsignedInt, 0);
         }
 
-        Mesh loadMesh()
+        Mesh loadMesh(string meshDir)
         {
-            return AssetManager.loadMesh("testassets/testcube.obj");
+            return AssetManager.loadMesh(meshDir);
         }
 
         Shader loadShader()

@@ -26,7 +26,7 @@ namespace CelsteEngine
         Vector3 _front = -Vector3.UnitZ;
 
         Vector3 _up = Vector3.UnitY;
-
+         
         Vector3 _right = Vector3.UnitX;
         private float _pitch;
         private float _yaw;
@@ -106,7 +106,7 @@ namespace CelsteEngine
 
         private Vector2 _lastPos;
         private bool _firstLoop = true;
-        private float _sensitivity = 1;
+        private float _sensitivity = 0.5f;
         public override void onUpdate(double deltaTime)
         {
             float speed = 1;
