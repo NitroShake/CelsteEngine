@@ -51,7 +51,7 @@ namespace CelsteEngine
         internal override void draw()
         {
             GL.BindVertexArray(vao);
-            var model = Matrix4.Identity;
+            var model = Matrix4.CreateTranslation(position);
             shader.SetMatrix4("model", model);
             shader.SetMatrix4("view", NodeManager.activeCamera.GetViewMatrix());
             shader.SetMatrix4("projection", NodeManager.activeCamera.GetProjectionMatrix());
