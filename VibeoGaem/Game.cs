@@ -17,12 +17,12 @@ namespace VibeoGaem
 
         protected override void OnLoad()
         {
-            NodeManager.masterNode = new MeshInstance("testassets/testcube.obj", new Vector3(0, 0, 0), new Vector3(0, 0, 0), new Vector3(0, 0, 0), false, 
+            NodeManager.masterNode = new MeshInstance("testassets/Grass_Block.obj", "testassets/Grass_Block_TEX.png", new Vector3(0, 0, 0), new Vector3(0, 0, 0), new Vector3(0, 0, 0), false, 
             new Node[]
             {
-                new MeshInstance("testassets/testcone.obj", new Vector3(0, 0, 0), new Vector3(0, 0, 0), new Vector3(0, 0, 0), false, new List<Node>(), null, new Color4(3,3,3,255)),
+                new MeshInstance("testassets/testcone.obj", "testassets/test2.png", new Vector3(0, 0, 0), new Vector3(0, 0, 0), new Vector3(0, 0, 0), false, new List<Node>(), null, new Color4(3,3,3,255)),
                 new Camera(new Vector3(0,0,0), new Vector3(0,0,0), new Vector3(0,0,0), false, new List<Node>(), null, 1.25f, true),
-                new MeshInstance("testassets/testtorus.obj", new Vector3(0, 0, 0), new Vector3(0, 0, 0), new Vector3(0, 0, 0), false, new List<Node>(), null, new Color4(3,3,255,255)),
+                new MeshInstance("testassets/testtorus.obj", "testassets/test3.png", new Vector3(0, 0, 0), new Vector3(0, 0, 0), new Vector3(0, 0, 0), false, new List<Node>(), null, new Color4(3,3,255,255)),
                 //new MeshInstance3D(new Vector3(1, 0, 0), new Vector3(0, 0, 0), new Vector3(0, 0, 0), false, new List<Node>(), null, new Color4(111,3,3,255) ), 
             }.ToList(), 
             null, new Color4(111, 222, 3, 255));

@@ -46,7 +46,8 @@ namespace CelsteEngine
         static private Mesh loadObj(string dir)
         {
             List<float> vertexes = new List<float>();
-            List<uint> indices = new List<uint>();
+            List<float> texCoords = new List<float>();
+            List<string[]> faceDetails = new List<string[]>();
             StreamReader sr = new StreamReader(dir);
             for (string line = sr.ReadLine(); line != null; line = sr.ReadLine())
             {
@@ -59,21 +60,69 @@ namespace CelsteEngine
                 }
                 else if (splitLine[0] == "f")
                 {
-                    for (int i = 1; i < splitLine.Length; i++)
-                    {
-                        string splitArg = splitLine[i].Split('/')[0];
-                        indices.Add(uint.Parse(splitArg) - 1);
-                    }
+                    //add to facedetails to be processed later
+                    faceDetails.Add(splitLine[1..]);
+                }
+                else if (splitLine[0] == "vt")
+                {
+                    texCoords.Add(float.Parse(splitLine[1]));
+                    texCoords.Add(float.Parse(splitLine[2]));
                 }
             }
-            return new Mesh(vertexes.ToArray(), indices.ToArray());
+
+            List<float> vertexData = new();
+            List<uint> indices = new List<uint>();
+
+            //get final VBO data
+            //this is complex so bear with me here:
+            //OBJs can have different texture coordinates per vertex *and* per face
+            //OpenGL's approach is to have one texture coordinate per vertex, however
+            //therefore, this algorithm duplicates vertex data if they have different texture coordinates, and adjusts element data as necessary.
+            foreach (string[] face in faceDetails)
+            {
+                for (int i = 0; i < face.Length; i++)
+                {
+                    List<float> potentialVertexData = new List<float>();
+                    string[] splitFace = face[i].Split('/');
+                    int vertexIndex = int.Parse(splitFace[0]) - 1;
+                    int textureCoordIndex = int.Parse(splitFace[1]) - 1;
+                    potentialVertexData.AddRange(vertexes.GetRange(vertexIndex * 3, 3));
+                    potentialVertexData.AddRange(texCoords.GetRange(textureCoordIndex * 2, 2));
+
+                    bool vertexDataAlreadyUsed = false;
+                    uint vertexStartingIndex = 0;
+                    for (int j = 0; j < vertexData.Count; j+=5)
+                    {
+                        if (potentialVertexData[0] == vertexData[j]
+                            && potentialVertexData[1] == vertexData[j+1]
+                            && potentialVertexData[2] == vertexData[j+2]
+                            && potentialVertexData[3] == vertexData[j+3]
+                            && potentialVertexData[4] == vertexData[j+4])
+                        {
+                            vertexDataAlreadyUsed = true;
+                            vertexStartingIndex = (uint)j;
+                        }
+                    }
+                    if (!vertexDataAlreadyUsed)
+                    {
+                        vertexStartingIndex = (uint)vertexData.Count;
+                        vertexData.AddRange(potentialVertexData);
+                    }
+
+                    indices.Add(vertexStartingIndex / 5);
+                }
+
+            }
+
+
+            return new Mesh(vertexData.ToArray(), indices.ToArray());
         }
 
 
 
         public static int loadTexture(string dir)
         {
-            if (meshes.ContainsKey(dir))
+            if (textures.ContainsKey(dir))
             {
                 return textures[dir];
             }
