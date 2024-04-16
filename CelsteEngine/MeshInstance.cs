@@ -64,13 +64,18 @@ namespace CelsteEngine
         Mesh loadMesh(string meshDir)
         {
             return AssetManager.loadMesh(meshDir);
-            return new Mesh(new float[] {        // Position             Texture coordinates
-        0.5f,  0.5f, 0.0f,      1.0f, 1.0f, // top right
-        0.5f, -0.5f, 0.0f,      1.0f, 0.0f, // bottom right
-        -0.5f, -0.5f, 0.0f,     0.0f, 0.0f, // bottom left
-        -0.5f,  0.5f, 0.0f,     0.0f, 1.0f  // top left
-            }, new uint[] { 0, 1, 3,
-        1, 2, 3});
+            return new Mesh(
+                new float[] {        // Position             Texture coordinates
+                    0.5f,  0.5f, 0.0f,      1.0f, 1.0f, // top right
+                    0.5f, -0.5f, 0.0f,      1.0f, 0.0f, // bottom right
+                    -0.5f, -0.5f, 0.0f,     0.0f, 0.0f, // bottom left
+                    -0.5f,  0.5f, 0.0f,     0.0f, 1.0f  // top left
+                }, 
+                new uint[] {
+                    0, 1, 3,
+                    1, 2, 3
+                }
+            );
 
             
         }

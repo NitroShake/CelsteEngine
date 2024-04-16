@@ -9,6 +9,8 @@ namespace CelsteEngine
 {
     public class AabbCollider : Collider
     {
+        //ordered xyz
+        public float width, height, depth;
         public AabbCollider(Vector3 position, Vector3 rotation, Vector3 scale, bool inheritTransform, List<Node> children, Node? parent) : base(position, rotation, scale, inheritTransform, children, parent)
         {
         }

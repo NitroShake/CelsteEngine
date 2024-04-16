@@ -20,5 +20,7 @@ namespace CelsteEngine
         public abstract void checkForCollision(Collider collider); //
         public abstract void resolveCollision(Collider collider); //to be called by checkForCollision when the collider hits a solid collider.
         public abstract void onCollision(Collider collider); //to be called by checkForCollision when the collider hits a non-solid collider.
+
+        public abstract void getClosestPoint(Vector3 target);
     }
 }
