@@ -15,6 +15,7 @@ namespace CelsteEngine
         {
             NodeManager.game = this;
             VSync = VSyncMode.On;
+            
         }
 
         protected override void OnLoad()
@@ -34,7 +35,6 @@ namespace CelsteEngine
             if (NodeManager.masterNode != null)
             {
                 NodeManager.masterNode.update(args.Time);
-
             }
         }
 
@@ -47,6 +47,15 @@ namespace CelsteEngine
                 node.draw();
             }
             SwapBuffers();
+        }
+
+        protected override void OnResize(ResizeEventArgs e)
+        {
+            base.OnResize(e);
+
+            GL.Viewport(0, 0, Size.X, Size.Y);
+            // We need to update the aspect ratio once the window has been resized.
+            NodeManager.activeCamera.aspectRatio = Size.X / (float)Size.Y;
         }
     }
 }

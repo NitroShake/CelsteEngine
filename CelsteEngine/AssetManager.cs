@@ -43,6 +43,11 @@ namespace CelsteEngine
             }
         }
 
+        /// <summary>
+        /// this loads an obj file. wowie!!!!!!
+        /// </summary>
+        /// <param name="dir"></param>
+        /// <returns></returns>
         static private Mesh loadObj(string dir)
         {
             List<float> vertexes = new List<float>();

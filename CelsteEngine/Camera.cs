@@ -21,7 +21,7 @@ namespace CelsteEngine
             }
         }
 
-        float aspectRatio;
+        public float aspectRatio;
         bool isActive;
         Vector3 _front = -Vector3.UnitZ;
 
