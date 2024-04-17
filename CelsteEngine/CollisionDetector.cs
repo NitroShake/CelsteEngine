@@ -31,9 +31,10 @@ namespace CelsteEngine
             );
         }
 
-        static void checkSphereAabbOverlap()
+        static void checkSphereAabbOverlap(SphereCollider sc, AabbCollider aabbc)
         {
-
+            Vector3 cMaxBounds = new Vector3(aabbc.position.X + (aabbc.width / 2), aabbc.position.Y + (aabbc.height / 2), aabbc.position.Z + (aabbc.depth / 2));
+            Vector3 cMinBounds = new Vector3(aabbc.position.X - (aabbc.width / 2), aabbc.position.Y - (aabbc.height / 2), aabbc.position.Z - (aabbc.depth / 2));
         }
 
         static bool checkAabbAabbOverlap(AabbCollider c1, AabbCollider c2)
