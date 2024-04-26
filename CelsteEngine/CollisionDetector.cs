@@ -11,13 +11,13 @@ namespace CelsteEngine
     //It exists to reduce code duplication.
     static class CollisionDetector
     {
-        static bool checkPointSphereOverlap(Vector3 point, SphereCollider c)
+        public static bool checkPointSphereOverlap(Vector3 point, SphereCollider c)
         {
             float distance = Vector3.Distance(c.position, point);
             return distance < c.radius;
         }
 
-        static bool checkPointAabbOverlap(Vector3 point, AabbCollider c)
+        public static bool checkPointAabbOverlap(Vector3 point, AabbCollider c)
         {
             Vector3 cMaxBounds = new Vector3(c.position.X + (c.width / 2), c.position.Y + (c.height / 2), c.position.Z + (c.depth / 2));
             Vector3 cMinBounds = new Vector3(c.position.X - (c.width / 2), c.position.Y - (c.height / 2), c.position.Z - (c.depth / 2));
@@ -31,13 +31,19 @@ namespace CelsteEngine
             );
         }
 
-        static void checkSphereAabbOverlap(SphereCollider sc, AabbCollider aabbc)
+        public static bool checkSphereAabbOverlap(SphereCollider sc, AabbCollider aabbc)
         {
             Vector3 cMaxBounds = new Vector3(aabbc.position.X + (aabbc.width / 2), aabbc.position.Y + (aabbc.height / 2), aabbc.position.Z + (aabbc.depth / 2));
             Vector3 cMinBounds = new Vector3(aabbc.position.X - (aabbc.width / 2), aabbc.position.Y - (aabbc.height / 2), aabbc.position.Z - (aabbc.depth / 2));
+            Vector3 aabbClosestPointToSphere = new Vector3(
+                Math.Max(cMinBounds.X, Math.Min(sc.position.X, cMaxBounds.X)),
+                Math.Max(cMinBounds.X, Math.Min(sc.position.X, cMaxBounds.X)),
+                Math.Max(cMinBounds.X, Math.Min(sc.position.X, cMaxBounds.X))
+            );
+            return checkPointSphereOverlap(aabbClosestPointToSphere, sc);
         }
 
-        static bool checkAabbAabbOverlap(AabbCollider c1, AabbCollider c2)
+        public static bool checkAabbAabbOverlap(AabbCollider c1, AabbCollider c2)
         {
             Vector3 c1MaxBounds = new Vector3(c1.position.X + (c1.width / 2), c1.position.Y + (c1.height / 2), c1.position.Z + (c1.depth / 2));
             Vector3 c1MinBounds = new Vector3(c1.position.X - (c1.width / 2), c1.position.Y - (c1.height / 2), c1.position.Z - (c1.depth / 2));
@@ -54,7 +60,7 @@ namespace CelsteEngine
             );
         }
 
-        static bool checkSphereSphereOverlap(SphereCollider c1, SphereCollider c2)
+        public static bool checkSphereSphereOverlap(SphereCollider c1, SphereCollider c2)
         {
             float distance = Vector3.Distance(c1.position, c2.position);
             return distance < c1.radius + c2.radius;

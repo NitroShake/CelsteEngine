@@ -15,12 +15,36 @@ namespace CelsteEngine
 
         bool isSolid;
 
-        public abstract void move();
+        public void move(Vector3 distance, float stepSize = 0.1f)
+        {
+            Vector3 targetPos = distance + position;
+            Vector3 step = distance.Normalized() * stepSize;
+            Collider collidingObject = null;
+            while (collidingObject == null && position != targetPos)
+            {
+                if (Vector3.Distance(position, targetPos) > stepSize)
+                {
+                    position = targetPos;
+                }
+                else
+                {
+                    position += step;
+                }
+                foreach (Collider collider in NodeManager.colliderNodes)
+                {
+                    if (checkForCollision(collider))
+                    {
+                        collidingObject = collider;
+                    }
+                }
+            }
+            if (collidingObject != null)
+            {
+                resolveCollision(collidingObject);
+            }
+        }
         
-        public abstract void checkForCollision(Collider collider); //
+        public abstract bool checkForCollision(Collider collider); //
         public abstract void resolveCollision(Collider collider); //to be called by checkForCollision when the collider hits a solid collider.
-        public abstract void onCollision(Collider collider); //to be called by checkForCollision when the collider hits a non-solid collider.
-
-        public abstract void getClosestPoint(Vector3 target);
     }
 }

@@ -15,19 +15,17 @@ namespace CelsteEngine
         {
         }
 
-        public override void checkForCollision(Collider collider)
+        public override bool checkForCollision(Collider collider)
         {
-            throw new NotImplementedException();
-        }
-
-        public override void move()
-        {
-            throw new NotImplementedException();
-        }
-
-        public override void onCollision(Collider collider)
-        {
-            throw new NotImplementedException();
+            if (collider is AabbCollider)
+            {
+                return CollisionDetector.checkAabbAabbOverlap(this, (AabbCollider)collider);
+            }
+            else if (collider is SphereCollider)
+            {
+                return CollisionDetector.checkSphereAabbOverlap((SphereCollider)collider, this);
+            }
+            else return false;
         }
 
         public override void resolveCollision(Collider collider)
