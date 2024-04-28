@@ -20,6 +20,7 @@ namespace CelsteEngine
             Vector3 targetPos = distance + position;
             Vector3 step = distance.Normalized() * stepSize;
             Collider collidingObject = null;
+            int stepsTaken = 0;
             while (collidingObject == null && position != targetPos)
             {
                 if (Vector3.Distance(position, targetPos) > stepSize)
@@ -37,14 +38,20 @@ namespace CelsteEngine
                         collidingObject = collider;
                     }
                 }
+                stepsTaken++;
             }
             if (collidingObject != null)
             {
-                resolveCollision(collidingObject);
+                resolveCollision(collidingObject, step, stepsTaken > 1 && position != targetPos);
             }
         }
-        
+
+        public Vector3 getNewDirectionAlongNormal(Vector3 oldDirection, Vector3 normal)
+        {
+            return oldDirection - (normal * Vector3.Dot(oldDirection, normal));
+        }
+
         public abstract bool checkForCollision(Collider collider); //
-        public abstract void resolveCollision(Collider collider); //to be called by checkForCollision when the collider hits a solid collider.
+        public abstract void resolveCollision(Collider collider, Vector3 originalDirection, bool continueMoving); //to be called by checkForCollision when the collider hits a solid collider.
     }
 }

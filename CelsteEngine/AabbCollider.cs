@@ -28,9 +28,10 @@ namespace CelsteEngine
             else return false;
         }
 
-        public override void resolveCollision(Collider collider)
+        public override void resolveCollision(Collider collider, Vector3 originalDirection, bool continueMoving)
         {
             throw new NotImplementedException();
+            
         }
     }
 }
