@@ -10,6 +10,7 @@ namespace CelsteEngine
 {
     public class Camera : Node3D
     {
+        public bool debugControl = false;
         public Camera(Vector3 position, Vector3 rotation, Vector3 scale, bool inheritTransform, List<Node> children, Node? parent, float aspectRatio, bool startActive)
             : base(position, rotation, scale, inheritTransform, children, parent)
         {
@@ -48,7 +49,7 @@ namespace CelsteEngine
                 // We clamp the pitch value between -89 and 89 to prevent the camera from going upside down, and a bunch
                 // of weird "bugs" when you are using euler angles for rotation.
                 // If you want to read more about this you can try researching a topic called gimbal lock
-                var angle = MathHelper.Clamp(value, -89f, 89f);
+                var angle = MathHelper.Clamp(value, -90f, 90f);
                 _pitch = MathHelper.DegreesToRadians(angle);
                 UpdateVectors();
             }
@@ -109,55 +110,58 @@ namespace CelsteEngine
         private float _sensitivity = 0.5f;
         public override void onUpdate(double deltaTime)
         {
-            float speed = 1;
-            var input = NodeManager.game.KeyboardState;
-
-            if (input.IsKeyDown(Keys.W))
+            if (debugControl)
             {
-                position += _front * speed * (float)deltaTime; //Forward 
-            }
+                float speed = 1;
+                var input = NodeManager.game.KeyboardState;
 
-            if (input.IsKeyDown(Keys.S))
-            {
-                position -= _front * speed * (float)deltaTime; //Backwards
-            }
+                if (input.IsKeyDown(Keys.W))
+                {
+                    position += _front * speed * (float)deltaTime; //Forward 
+                }
 
-            if (input.IsKeyDown(Keys.A))
-            {
-                position -= Vector3.Normalize(Vector3.Cross(_front, _up)) * speed * (float)deltaTime; //Left
-            }
+                if (input.IsKeyDown(Keys.S))
+                {
+                    position -= _front * speed * (float)deltaTime; //Backwards
+                }
 
-            if (input.IsKeyDown(Keys.D))
-            {
-                position += Vector3.Normalize(Vector3.Cross(_front, _up)) * speed * (float)deltaTime; //Right
-            }
+                if (input.IsKeyDown(Keys.A))
+                {
+                    position -= Vector3.Normalize(Vector3.Cross(_front, _up)) * speed * (float)deltaTime; //Left
+                }
 
-            if (input.IsKeyDown(Keys.Space))
-            {
-                position += _up * speed * (float)deltaTime; //Up 
-            }
+                if (input.IsKeyDown(Keys.D))
+                {
+                    position += Vector3.Normalize(Vector3.Cross(_front, _up)) * speed * (float)deltaTime; //Right
+                }
 
-            if (input.IsKeyDown(Keys.LeftShift))
-            {
-                position -= _up * speed * (float)deltaTime; //Down
-            }
+                if (input.IsKeyDown(Keys.Space))
+                {
+                    position += _up * speed * (float)deltaTime; //Up 
+                }
 
-            // Get the mouse state
-            var mouse = NodeManager.game.MouseState;
+                if (input.IsKeyDown(Keys.LeftShift))
+                {
+                    position -= _up * speed * (float)deltaTime; //Down
+                }
 
-            if (_firstLoop) // This bool variable is initially set to true.
-            {
-                _lastPos = new Vector2(mouse.X, mouse.Y);
-                _firstLoop = false;
-            }
-            else
-            {
-                // Calculate the offset of the mouse position
-                var deltaX = mouse.X - _lastPos.X;
-                var deltaY = mouse.Y - _lastPos.Y;
-                _lastPos = new Vector2(mouse.X, mouse.Y);
-                Yaw += deltaX * _sensitivity;
-                Pitch -= deltaY * _sensitivity;
+                // Get the mouse state
+                var mouse = NodeManager.game.MouseState;
+
+                if (_firstLoop) // This bool variable is initially set to true.
+                {
+                    _lastPos = new Vector2(mouse.X, mouse.Y);
+                    _firstLoop = false;
+                }
+                else
+                {
+                    // Calculate the offset of the mouse position
+                    var deltaX = mouse.X - _lastPos.X;
+                    var deltaY = mouse.Y - _lastPos.Y;
+                    _lastPos = new Vector2(mouse.X, mouse.Y);
+                    Yaw += deltaX * _sensitivity;
+                    Pitch -= deltaY * _sensitivity;
+                }
             }
         }
     }

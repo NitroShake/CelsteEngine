@@ -14,6 +14,7 @@ namespace CelsteEngine
         public static bool checkPointSphereOverlap(Vector3 point, SphereCollider c)
         {
             float distance = Vector3.Distance(c.position, point);
+            Console.WriteLine(point);
             return distance < c.radius;
         }
 
@@ -37,8 +38,8 @@ namespace CelsteEngine
             Vector3 cMinBounds = new Vector3(aabbc.position.X - (aabbc.width / 2), aabbc.position.Y - (aabbc.height / 2), aabbc.position.Z - (aabbc.depth / 2));
             Vector3 aabbClosestPointToSphere = new Vector3(
                 Math.Max(cMinBounds.X, Math.Min(sc.position.X, cMaxBounds.X)),
-                Math.Max(cMinBounds.X, Math.Min(sc.position.X, cMaxBounds.X)),
-                Math.Max(cMinBounds.X, Math.Min(sc.position.X, cMaxBounds.X))
+                Math.Max(cMinBounds.Y, Math.Min(sc.position.Y, cMaxBounds.Y)),
+                Math.Max(cMinBounds.Z, Math.Min(sc.position.Z, cMaxBounds.Z))
             );
             return checkPointSphereOverlap(aabbClosestPointToSphere, sc);
         }

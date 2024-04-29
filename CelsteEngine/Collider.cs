@@ -11,11 +11,18 @@ namespace CelsteEngine
     {
         protected Collider(Vector3 position, Vector3 rotation, Vector3 scale, bool inheritTransform, List<Node> children, Node? parent) : base(position, rotation, scale, inheritTransform, children, parent)
         {
+            NodeManager.colliderNodes.Add(this);
+        }
+
+        internal override void dispose()
+        {
+            NodeManager.colliderNodes.Remove(this);
+            base.dispose();
         }
 
         bool isSolid;
 
-        public void move(Vector3 distance, float stepSize = 0.1f)
+        public void move(Vector3 distance, float stepSize = 0.01f)
         {
             Vector3 targetPos = distance + position;
             Vector3 step = distance.Normalized() * stepSize;
@@ -33,7 +40,7 @@ namespace CelsteEngine
                 }
                 foreach (Collider collider in NodeManager.colliderNodes)
                 {
-                    if (checkForCollision(collider))
+                    if (collider != this && checkForCollision(collider))
                     {
                         collidingObject = collider;
                     }
@@ -42,13 +49,16 @@ namespace CelsteEngine
             }
             if (collidingObject != null)
             {
-                resolveCollision(collidingObject, step, stepsTaken > 1 && position != targetPos);
+                Console.WriteLine("collider");
+                resolveCollision(collidingObject, targetPos - position, stepsTaken > 1 && position != targetPos);
             }
         }
 
         public Vector3 getNewDirectionAlongNormal(Vector3 oldDirection, Vector3 normal)
         {
-            return oldDirection - (normal * Vector3.Dot(oldDirection, normal));
+            Vector3 vec = oldDirection + (normal * Vector3.Dot(oldDirection, normal));
+            //vec = vec.Normalized() * Vector3.Distance(new Vector3(0, 0, 0), oldDirection);
+            return vec;
         }
 
         public abstract bool checkForCollision(Collider collider); //

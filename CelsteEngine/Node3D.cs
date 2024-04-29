@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace CelsteEngine
 {
-    public abstract class Node3D : Node
+    public class Node3D : Node
     {
-        public Node3D(Vector3 position, Vector3 rotation, Vector3 scale, bool inheritTransform, List<Node> children, Node? parent) : base(children, parent)
+        public Node3D(Vector3 position, Vector3 rotation, Vector3 scale, bool inheritTransform, List<Node> children = null, Node? parent = null) : base(children, parent)
         {
             this.scale = scale;
             this.position = position;

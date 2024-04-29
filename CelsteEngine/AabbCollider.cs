@@ -13,6 +13,9 @@ namespace CelsteEngine
         public float width, height, depth;
         public AabbCollider(Vector3 position, Vector3 rotation, Vector3 scale, bool inheritTransform, List<Node> children, Node? parent) : base(position, rotation, scale, inheritTransform, children, parent)
         {
+            width = scale.X;
+            depth = scale.Z;
+            height = scale.Y;
         }
 
         public override bool checkForCollision(Collider collider)

@@ -9,10 +9,13 @@ namespace CelsteEngine
 {
     public class Node
     {
-        public Node(List<Node> children, Node? parent)
+        public Node(List<Node> children = null, Node parent = null)
         {
             load();
-            this.parent = parent;
+            if (children == null)
+            {
+                children = new List<Node>();
+            }
             if (parent != null)
             {
                 parent.addChild(this);

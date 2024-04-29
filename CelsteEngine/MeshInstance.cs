@@ -18,10 +18,17 @@ namespace CelsteEngine
         int vbo;
         int ebo;
 
-        public MeshInstance(string meshDir, string textureDir, Vector3 position, Vector3 rotation, Vector3 scale, bool inheritTransform, List<Node> children, Node? parent, Color4 color) : base(position, rotation, scale, inheritTransform, children, parent)
+        public MeshInstance(string meshDir, string textureDir, Vector3 position, Vector3 rotation, Vector3 scale, bool inheritTransform, List<Node> children = null, Node? parent = null, Color4? color = null) : base(position, rotation, scale, inheritTransform, children, parent)
         {
-            this.color = color;
-            mesh = loadMesh(meshDir);
+            if (color != null)
+            {
+                this.color = (Color4)color;
+            }
+            else
+            {
+                color = new Color4(255, 255, 255, 255);
+            }
+            mesh = AssetManager.loadMesh(meshDir);
             texture = AssetManager.loadTexture(textureDir);
             vao = GL.GenVertexArray();
             vbo = GL.GenBuffer();
@@ -44,14 +51,12 @@ namespace CelsteEngine
             var texCoordLocation = shader.getAttributeLocation("aTexCoord");
             GL.EnableVertexAttribArray(texCoordLocation);
             GL.VertexAttribPointer(texCoordLocation, 2, VertexAttribPointerType.Float, false, 5 * sizeof(float), 3 * sizeof(float));
-
-            //GL.Uniform1(GL.GetUniformLocation(shader.getHandle(), "texture0"), 0);
         }
 
         internal override void draw()
         {
             GL.BindVertexArray(vao);
-            var model = Matrix4.CreateTranslation(position);
+            var model = Matrix4.CreateTranslation(position) * Matrix4.CreateFromQuaternion(Quaternion.FromEulerAngles(rotation));
             shader.SetMatrix4("model", model);
             shader.SetMatrix4("view", NodeManager.activeCamera.GetViewMatrix());
             shader.SetMatrix4("projection", NodeManager.activeCamera.GetProjectionMatrix());
@@ -75,9 +80,7 @@ namespace CelsteEngine
                     0, 1, 3,
                     1, 2, 3
                 }
-            );
-
-            
+            );  
         }
 
         Shader loadShader()
