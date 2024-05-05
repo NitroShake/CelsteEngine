@@ -9,6 +9,9 @@ namespace CelsteEngine
 {
     public class Node
     {
+        List<Node> nodesToAdd = new();
+
+
         public Node(List<Node> children = null, Node parent = null)
         {
             load();
@@ -35,10 +38,17 @@ namespace CelsteEngine
             {
                 child.update(deltaTime);
             }
+            children.AddRange(nodesToAdd);
+            nodesToAdd.Clear();
         }
 
         public virtual void onUpdate(double deltaTime) { }
         public virtual void load() { }
+
+        public void queueAddNode(Node node)
+        {
+            nodesToAdd.Add(node);
+        }
 
         public virtual void addChild(Node node) 
         {
@@ -69,7 +79,7 @@ namespace CelsteEngine
         /// <summary>
         /// Unloads the object, performing any 
         /// </summary>
-        internal virtual void dispose()
+        public virtual void dispose()
         {
             if (parent != null)
             {

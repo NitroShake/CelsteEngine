@@ -11,11 +11,17 @@ namespace CelsteEngine
 {
     public class CelsteGame : GameWindow
     {
+        List<Node> nodesToRemove = new();
+
         public CelsteGame(int width, int height, string title) : base(GameWindowSettings.Default, new NativeWindowSettings() { Size = (width, height), Title = title }) 
         {
             NodeManager.game = this;
             VSync = VSyncMode.On;
-            
+        }
+
+        public void queueDeleteNode(Node node)
+        {
+            nodesToRemove.Add(node);
         }
 
         protected override void OnLoad()
@@ -36,6 +42,11 @@ namespace CelsteEngine
             {
                 NodeManager.masterNode.update(args.Time);
             }
+            foreach (Node node in nodesToRemove)
+            {
+                node.dispose();
+            }
+            nodesToRemove.Clear();
         }
 
         protected override void OnRenderFrame(FrameEventArgs args)

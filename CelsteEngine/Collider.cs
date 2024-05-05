@@ -14,7 +14,7 @@ namespace CelsteEngine
             NodeManager.colliderNodes.Add(this);
         }
 
-        internal override void dispose()
+        public override void dispose()
         {
             NodeManager.colliderNodes.Remove(this);
             base.dispose();

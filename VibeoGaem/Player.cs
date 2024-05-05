@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace VibeoGaem
 {
-    internal class Player : SphereCollider
+    internal class Player : Entity
     {
         MeshInstance mesh;
         public Player(Vector3 position, Vector3 rotation, Vector3 scale, bool inheritTransform, List<Node> children, Node? parent) : base(position, rotation, scale, inheritTransform, children, parent)
@@ -24,7 +24,7 @@ namespace VibeoGaem
 
         public override void onUpdate(double deltaTime)
         {
-            float speed = 1.5f * (float)deltaTime;
+            float speed = 3f * (float)deltaTime;
             var input = NodeManager.game.KeyboardState;
 
             Vector3 movement = new Vector3(0, 0, 0);
@@ -51,16 +51,21 @@ namespace VibeoGaem
             move(movement);
             base.onUpdate(deltaTime);
 
-            rotation = getRotationTowardsMouse();
+            rotation = handleMouseInput();
 
             mesh.position = position;
             mesh.rotation = rotation;
         }
 
-        Vector3 getRotationTowardsMouse()
+        Vector3 handleMouseInput()
         {
             float mouseX = NodeManager.game.MousePosition.X / NodeManager.game.Size.X - 0.5f;
             float mouseY = NodeManager.game.MousePosition.Y / NodeManager.game.Size.Y - 0.5f;
+            if (NodeManager.game.IsMouseButtonPressed(MouseButton.Left))
+            {
+                Vector3 direction = new Vector3(mouseY, 0, -mouseX).Normalized();
+                children.Add(new Projectile(direction, position + direction * 5, new Vector3(0,0,0), new Vector3(1,1,1), false, new List<Node>(), this));
+            }
             float rotation = (float)(Math.Atan2(mouseY, mouseX));
             Console.WriteLine(rotation);
             return new Vector3(0,-rotation - (float)Math.PI / 2,0);

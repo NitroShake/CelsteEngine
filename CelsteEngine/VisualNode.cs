@@ -14,7 +14,7 @@ namespace CelsteEngine
             NodeManager.visualNodes.Add(this);
         }
 
-        internal override void dispose()
+        public override void dispose()
         {
             NodeManager.visualNodes.Remove(this);
         }

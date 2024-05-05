@@ -16,6 +16,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="assets\asteroid.obj">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="assets\asteroiddiffuse.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="assets\asteroidnormal.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="assets\cone.mtl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
