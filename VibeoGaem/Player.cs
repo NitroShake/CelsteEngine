@@ -26,8 +26,6 @@ namespace VibeoGaem
         {
             float speed = 1.5f * (float)deltaTime;
             var input = NodeManager.game.KeyboardState;
-            mesh.position = position;
-            mesh.rotation = rotation;
 
             Vector3 movement = new Vector3(0, 0, 0);
             if (input.IsKeyDown(Keys.A))
@@ -53,6 +51,19 @@ namespace VibeoGaem
             move(movement);
             base.onUpdate(deltaTime);
 
+            rotation = getRotationTowardsMouse();
+
+            mesh.position = position;
+            mesh.rotation = rotation;
+        }
+
+        Vector3 getRotationTowardsMouse()
+        {
+            float mouseX = NodeManager.game.MousePosition.X / NodeManager.game.Size.X - 0.5f;
+            float mouseY = NodeManager.game.MousePosition.Y / NodeManager.game.Size.Y - 0.5f;
+            float rotation = (float)(Math.Atan2(mouseY, mouseX));
+            Console.WriteLine(rotation);
+            return new Vector3(0,-rotation - (float)Math.PI / 2,0);
         }
     }
 }
