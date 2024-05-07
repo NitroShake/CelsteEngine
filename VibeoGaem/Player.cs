@@ -31,6 +31,11 @@ namespace VibeoGaem
             float speed = 3f * (float)deltaTime;
             var input = NodeManager.game.KeyboardState;
 
+            if (input.IsKeyDown(Keys.LeftShift))
+            {
+                speed *= 2;
+            }
+
             Vector3 movement = new Vector3(0, 0, 0);
             if (input.IsKeyDown(Keys.A))
             {
@@ -68,7 +73,7 @@ namespace VibeoGaem
             if (NodeManager.game.IsMouseButtonDown(MouseButton.Left) && projectileTimer > projectileInterval)
             {
                 Vector3 direction = new Vector3(mouseY, 0, -mouseX).Normalized();
-                addChild(new Projectile(direction, position + direction * 1.7f, new Vector3(0,0,0), new Vector3(0.4f,0.4f,0.4f), false, new List<Node>(), null));
+                addChild(new Projectile(direction, position + direction * 1.5f, new Vector3(0,0,0), new Vector3(0.4f,0.4f,0.4f), false, new List<Node>(), null));
                 projectileTimer = 0;
             }
             float rotation = (float)(Math.Atan2(mouseY, mouseX));

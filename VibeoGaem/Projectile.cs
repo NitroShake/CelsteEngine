@@ -20,7 +20,7 @@ namespace VibeoGaem
             {
                 mesh
             }.ToList();
-            this.direction = direction.Normalized() * 3f;
+            this.direction = direction.Normalized() * 5f;
         }
 
         public override void onUpdate(double deltaTime)

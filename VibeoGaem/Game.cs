@@ -34,6 +34,9 @@ namespace VibeoGaem
                     //new AabbCollider(new Vector3(0,0, -10), new Vector3(0,0,0), new Vector3(3, 3, 3), false, new List<Node>(), null),
                     new SphereCollider(new Vector3(0,0, -10), new Vector3(0,0,0), new Vector3(1,1,1), false, new List<Node>(), null ),
                     new MeshInstance("testassets/testtorus.obj", "testassets/test3.png", new Vector3(0, 3, 0), new Vector3(0, 0, 0), new Vector3(0, 0, 0), false, new List<Node>(), null, new Color4(255,255,255,255)),
+                    new MeshInstance("testassets/cube.obj", "testassets/test3.png", new Vector3(-10, 0, -10), new Vector3(0, 0, 0), new Vector3(0, 0, 0), false, new List<Node>(), null, new Color4(255,255,255,255)),
+                    new AabbCollider(new Vector3(-10, 0, -10), new Vector3(0, 0, 0), new Vector3(4, 1, 100), false, new List<Node>(), null),
+                    new AabbCollider(new Vector3(-10, 0, -10), new Vector3(0, 0, 0), new Vector3(100, 1, 4), false, new List<Node>(), null),
                     new Asteroid(new Vector3(5,0,0), new Vector3(0,0,0), new Vector3(2.25f,2.25f,2.25f), false, new List<Node>(), null ),
                     new Player(new Vector3(0,0,0), new Vector3(0,0,0), new Vector3(1.1f,1.1f,1.1f), false, new List<Node>(), null)
                 }.ToList());

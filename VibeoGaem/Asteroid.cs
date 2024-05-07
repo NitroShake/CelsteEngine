@@ -31,5 +31,13 @@ namespace VibeoGaem
             mesh.rotation += meshDeltaRotation * (float)deltaTime;
             base.onUpdate(deltaTime);
         }
+
+        public override void resolveCollision(Collider collider, Vector3 originalDirection, bool continueMoving)
+        {
+            if (collider is not Projectile)
+            {
+                base.resolveCollision(collider, originalDirection, continueMoving);
+            }
+        }
     }
 }

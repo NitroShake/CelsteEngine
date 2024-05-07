@@ -96,11 +96,12 @@ namespace CelsteEngine
                     dz = closestPointOffsetAbs.Z;
                 }*/
                 Vector3 normal = new Vector3(dx, dy, dz).Normalized();
-                float overlap = radius - Vector3.Distance(aabbClosestPointToSphere, position);
+                float overlap = (radius - Vector3.Distance(aabbClosestPointToSphere, position) + 0.0000001f);
                 position += normal * overlap;
                 if (continueMoving)
                 {
-                    //move(getNewDirectionAlongNormal(originalDirection, normal));
+                    //move(normal * overlap);
+                    move(getNewDirectionAlongNormal(originalDirection, normal));
                 }
             }
         }
