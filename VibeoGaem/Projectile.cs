@@ -15,17 +15,17 @@ namespace VibeoGaem
 
         public Projectile(Vector3 direction, Vector3 position, Vector3 rotation, Vector3 scale, bool inheritTransform, List<Node> children, Node? parent) : base(position, rotation, scale, inheritTransform, children, parent)
         {
-            mesh = new MeshInstance("testassets/testcone.obj", "testassets/test2.png", position, rotation, scale, false, new List<Node>(), null, new Color4(255, 255, 255, 255));
+            mesh = new MeshInstance("assets/projectile.obj", "testassets/test2.png", position, rotation, scale, false, new List<Node>(), null, new Color4(255, 255, 255, 255));
             this.children = new Node[]
             {
                 mesh
             }.ToList();
-            this.direction = direction.Normalized() * 0.01f;
+            this.direction = direction.Normalized() * 3f;
         }
 
         public override void onUpdate(double deltaTime)
         {
-            move(direction);
+            move(direction * (float)deltaTime);
             mesh.position = position;
             mesh.rotation = rotation;
             base.onUpdate(deltaTime);
@@ -33,11 +33,15 @@ namespace VibeoGaem
 
         public override void resolveCollision(Collider collider, Vector3 originalDirection, bool continueMoving)
         {
-            if (collider is Entity && collider is not Player)
+            if (collider is Asteroid)
             {
                 Entity entity = (Entity)collider;
                 entity.takeDamage(1);
                 NodeManager.game.queueDeleteNode(this);
+            }
+            else if (collider is Projectile)
+            {
+
             }
             else
             {

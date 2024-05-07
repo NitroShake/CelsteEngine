@@ -19,7 +19,7 @@ namespace VibeoGaem
         void trackPlayer()
         {
             position = targetPlayer.position;
-            position.X -= 1f;
+            position.X -= 0.8f;
             position.Y += 20;
             Pitch = -90f;
 

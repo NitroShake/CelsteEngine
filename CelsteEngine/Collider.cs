@@ -40,7 +40,7 @@ namespace CelsteEngine
                 }
                 foreach (Collider collider in NodeManager.colliderNodes)
                 {
-                    if (collider != this && checkForCollision(collider))
+                    if (collider != this && checkForCollision(collider) && !NodeManager.game.nodesToRemove.Contains(collider))
                     {
                         collidingObject = collider;
                     }

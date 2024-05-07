@@ -11,7 +11,7 @@ namespace CelsteEngine
 {
     public class CelsteGame : GameWindow
     {
-        List<Node> nodesToRemove = new();
+        public List<Node> nodesToRemove = new();
 
         public CelsteGame(int width, int height, string title) : base(GameWindowSettings.Default, new NativeWindowSettings() { Size = (width, height), Title = title }) 
         {
