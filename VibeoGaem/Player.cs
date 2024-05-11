@@ -13,6 +13,7 @@ namespace VibeoGaem
     {
         public double score;
         MeshInstance mesh;
+        double invulnerableTimer = 1;
         double projectileInterval = 0.33;
         double projectileTimer = 0;
 
@@ -27,6 +28,7 @@ namespace VibeoGaem
 
         public override void onUpdate(double deltaTime)
         {
+            invulnerableTimer -= deltaTime;
             projectileTimer += deltaTime;
             float speed = 5f * (float)deltaTime;
             var input = NodeManager.game.KeyboardState;
@@ -77,7 +79,7 @@ namespace VibeoGaem
             if (NodeManager.game.IsMouseButtonDown(MouseButton.Left) && projectileTimer > projectileInterval)
             {
                 Vector3 direction = new Vector3(mouseY, 0, -mouseX).Normalized();
-                addChild(new Projectile("assets/player.png", direction, position + direction * 1.5f, new Vector3(0,0,0), new Vector3(0.5f,0.5f,0.5f), false, new List<Node>(), null));
+                addChild(new Projectile("assets/player.png", 8, direction, position + direction * 1.5f, new Vector3(0,0,0), new Vector3(0.5f,0.5f,0.5f), false, new List<Node>(), null));
                 projectileTimer = 0;
             }
             float rotation = (float)(Math.Atan2(mouseY, mouseX));
@@ -87,6 +89,10 @@ namespace VibeoGaem
 
         public override void resolveCollision(Collider collider, Vector3 originalDirection, bool continueMoving)
         {
+            if (collider is Asteroid)
+            {
+                takeDamage(1, null);
+            }
             if (collider is not Projectile)
             {
                 base.resolveCollision(collider, originalDirection, continueMoving);
@@ -105,6 +111,18 @@ namespace VibeoGaem
                 Console.WriteLine();
             }
             Console.WriteLine(Math.Round(this.score));
+        }
+        public override void takeDamage(float damage, Entity dealer)
+        {
+            if (invulnerableTimer <= 0)
+            {
+                base.takeDamage(damage, dealer);
+                invulnerableTimer = 2;
+            }
+            if (health <= 0)
+            {
+                Console.WriteLine($"You died! Final Score: {score}");
+            }
         }
     }
 }

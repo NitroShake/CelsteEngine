@@ -13,14 +13,16 @@ namespace VibeoGaem
         Vector3 direction;
         MeshInstance mesh;
 
-        public Projectile(string texture, Vector3 direction, Vector3 position, Vector3 rotation, Vector3 scale, bool inheritTransform, List<Node> children, Node? parent) : base(position, rotation, scale, inheritTransform, children, parent)
+        public Projectile(string texture, float speed, Vector3 direction, Vector3 position, Vector3 rotation, Vector3 scale, bool inheritTransform, List<Node> children, Node? parent) : base(position, rotation, scale, inheritTransform, children, parent)
         {
+            id = 1;
+            ignoreIds.Add(id);
             mesh = new MeshInstance("assets/projectile.obj", texture, position, rotation, scale, false, new List<Node>(), null, new Color4(255, 255, 255, 255));
             this.children = new Node[]
             {
                 mesh
             }.ToList();
-            this.direction = direction.Normalized() * 5f;
+            this.direction = direction.Normalized() * speed;
         }
 
         public override void onUpdate(double deltaTime)
@@ -33,7 +35,7 @@ namespace VibeoGaem
 
         public override void resolveCollision(Collider collider, Vector3 originalDirection, bool continueMoving)
         {
-            if (collider is Entity)
+            if (collider is Entity && collider != parent)
             {
                 Entity entity = (Entity)collider;
                 entity.takeDamage(1, (Entity)parent);

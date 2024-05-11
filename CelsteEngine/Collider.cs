@@ -9,6 +9,8 @@ namespace CelsteEngine
 {
     public abstract class Collider : Node3D
     {
+        public int id = 0;
+        public List<int> ignoreIds = new();
         protected Collider(Vector3 position, Vector3 rotation, Vector3 scale, bool inheritTransform, List<Node> children, Node? parent) : base(position, rotation, scale, inheritTransform, children, parent)
         {
             NodeManager.colliderNodes.Add(this);
@@ -40,7 +42,7 @@ namespace CelsteEngine
                 }
                 foreach (Collider collider in NodeManager.colliderNodes)
                 {
-                    if (collider != this && checkForCollision(collider) && !NodeManager.game.nodesToRemove.Contains(collider))
+                    if (collider != this && !NodeManager.game.nodesToRemove.Contains(collider) && !ignoreIds.Contains(collider.id) && checkForCollision(collider))
                     {
                         collidingObject = collider;
                     }

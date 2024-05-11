@@ -34,6 +34,10 @@ namespace VibeoGaem
 
         public override void resolveCollision(Collider collider, Vector3 originalDirection, bool continueMoving)
         {
+            if (collider is Player)
+            {
+                ((Player)collider).takeDamage(1, null);
+            }
             if (collider is not Projectile)
             {
                 base.resolveCollision(collider, originalDirection, continueMoving);

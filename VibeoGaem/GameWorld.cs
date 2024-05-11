@@ -39,8 +39,8 @@ namespace VibeoGaem
             if (entityTimer > entityMaxTimer)
             {
                 Vector3 offset = new Vector3((float)(random.NextDouble() - 0.5), 0, (float)(random.NextDouble() - 0.5)).Normalized();
-                offset *= random.Next(5, 10);
-                //NodeManager.masterNode.addChild(new Enemy(player, player.position + offset, new(), new Vector3(1,1,1), false, new(), null));
+                offset *= random.Next(10, 20);
+                NodeManager.masterNode.addChild(new Enemy(player, player.position + offset, new(), new Vector3(1,1,1), false, new(), null));
                 entityTimer = 0;
             }
 
@@ -48,8 +48,8 @@ namespace VibeoGaem
             if (asteroidTimer > asteroidMaxTimer)
             {
                 Vector3 offset = new Vector3((float)(random.NextDouble() - 0.5), 0, (float)(random.NextDouble() - 0.5)).Normalized();
-                offset *= random.Next(5, 10);
-                //addChild(new Asteroid(player.position + offset, new(), new(), false, new(), null));
+                offset *= random.Next(10, 20);
+                addChild(new Asteroid(player.position + offset, new(), new(), false, new(), null));
                 asteroidTimer = 0;
             }
         }
