@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CelsteEngine
 {
-    static class AssetManager
+    public static class AssetManager
     {
         public static Dictionary<string, Mesh> meshes = new();
         public static Dictionary<string, int> textures = new();

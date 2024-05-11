@@ -18,7 +18,7 @@ namespace VibeoGaem
 
         }
 
-        public void takeDamage(float damage)
+        public virtual void takeDamage(float damage, Entity dealer)
         {
             health -= damage;
             if (health <= 0)

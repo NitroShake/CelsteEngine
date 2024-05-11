@@ -37,6 +37,12 @@
     <None Update="assets\cone.obj">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="assets\enemE.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="assets\player.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="assets\playerprojectile.mtl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

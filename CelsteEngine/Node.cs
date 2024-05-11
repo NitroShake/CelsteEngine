@@ -52,7 +52,7 @@ namespace CelsteEngine
 
         public virtual void addChild(Node node) 
         {
-            if (node.parent != null)
+            if (node.parent != null && node.parent != this)
             {
                 throw new InvalidOperationException("Node already has a parent! Use removeChild(node) first");
             }
