@@ -20,7 +20,7 @@ namespace VibeoGaem
         {
             health = 5;
             this.target = target;
-            mesh = new MeshInstance("assets/cone.obj", "assets/enemE.png", new Vector3(0, 0, 0), new Vector3(0, 0, 0), new Vector3(0, 0, 0), false, color: new Color4(255, 255, 255, 255));
+            mesh = new OutlinedMeshInstance(new Color4(255, 70, 70, 255), "assets/cone2.obj", "assets/ship.png", new Vector3(0, 0, 0), new Vector3(0, 0, 0), new Vector3(0, 0, 0), false, color: new Color4(255, 255, 255, 255));
             addChild(mesh);
         }
 

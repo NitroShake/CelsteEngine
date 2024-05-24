@@ -12,6 +12,8 @@ namespace CelsteEngine
     public class Shader : IDisposable
     {
         int handle;
+        string debugVert = "";
+        string debugFrag = "";
 
         public int getHandle()
         {
@@ -62,6 +64,8 @@ namespace CelsteEngine
         public Shader(string vertexPath, string fragmentPath)
         {
             //read and create shaders
+            debugFrag = fragmentPath;
+            debugVert = vertexPath;
             string vertexShaderSource = File.ReadAllText(vertexPath);
             string fragmentShaderSource = File.ReadAllText(fragmentPath);
 

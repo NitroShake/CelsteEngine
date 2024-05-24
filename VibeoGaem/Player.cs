@@ -20,7 +20,7 @@ namespace VibeoGaem
         public Player(Vector3 position, Vector3 rotation, Vector3 scale, bool inheritTransform, List<Node> children, Node? parent) : base(position, rotation, scale, inheritTransform, children, parent)
         {
             health = 10;
-            mesh = new MeshInstance("assets/cone.obj", "assets/player.png", new Vector3(0, 0, 0), new Vector3(0, 0, 0), new Vector3(0, 0, 0), false, color: new Color4(255, 255, 255, 255));
+            mesh = new OutlinedMeshInstance(new Color4(10,200, 200, 255), "assets/cone2.obj", "assets/ship.png", new Vector3(0, 0, 0), new Vector3(0, 0, 0), new Vector3(0, 0, 0), false, color: new Color4(255, 255, 255, 255));
             addChild(mesh);
             addChild(new PlayerCamera(new Vector3(0, 0, 0), new Vector3(0, 0, 0), new Vector3(0, 0, 0), false, new List<Node>(), this, 1.25f, true, this));
             this.scale = new Vector3(1, 1, 1);
@@ -71,15 +71,15 @@ namespace VibeoGaem
         Vector3 handleMouseInput()
         {
             float mouseX = NodeManager.game.MousePosition.X / NodeManager.game.Size.X - 0.5f;
-            Console.WriteLine(mouseX);
+            //Console.WriteLine(mouseX);
             mouseX *= NodeManager.game.Size.X;
-            Console.WriteLine(mouseX);
+            //Console.WriteLine(mouseX);
             float mouseY = NodeManager.game.MousePosition.Y / NodeManager.game.Size.Y - 0.5f;
             mouseY *= NodeManager.game.Size.Y;
             if (NodeManager.game.IsMouseButtonDown(MouseButton.Left) && projectileTimer > projectileInterval)
             {
                 Vector3 direction = new Vector3(mouseY, 0, -mouseX).Normalized();
-                addChild(new Projectile("assets/player.png", 8, direction, position + direction * 1.5f, new Vector3(0,0,0), new Vector3(0.5f,0.5f,0.5f), false, new List<Node>(), null));
+                addChild(new Projectile("assets/player.png", 10, direction, position + direction * 1.5f, new Vector3(0,0,0), new Vector3(0.5f,0.5f,0.5f), false, new List<Node>(), null));
                 projectileTimer = 0;
             }
             float rotation = (float)(Math.Atan2(mouseY, mouseX));

@@ -10,13 +10,13 @@ namespace CelsteEngine
 {
     public class MeshInstance : VisualNode
     {
-        Mesh mesh;
-        Shader shader;
-        int texture;
-        Color4 color;
-        int vao;
-        int vbo;
-        int ebo;
+        protected Mesh mesh;
+        protected Shader shader;
+        protected int texture;
+        protected Color4 color;
+        protected int vao;
+        protected int vbo;
+        protected int ebo;
 
         public MeshInstance(string meshDir, string textureDir, Vector3 position, Vector3 rotation, Vector3 scale, bool inheritTransform, List<Node> children = null, Node? parent = null, Color4? color = null) : base(position, rotation, scale, inheritTransform, children, parent)
         {
@@ -55,7 +55,9 @@ namespace CelsteEngine
 
         internal override void draw()
         {
+            GL.StencilMask(0x00);
             GL.BindVertexArray(vao);
+            shader.Use();
             var model = Matrix4.CreateFromQuaternion(Quaternion.FromEulerAngles(rotation)) * Matrix4.CreateTranslation(position);
             shader.SetMatrix4("model", model);
             shader.SetMatrix4("view", NodeManager.activeCamera.GetViewMatrix());
@@ -64,6 +66,24 @@ namespace CelsteEngine
             GL.ActiveTexture(TextureUnit.Texture0);
             GL.BindTexture(TextureTarget.Texture2D, texture);
             GL.DrawElements(PrimitiveType.Triangles, mesh.indices.Length, DrawElementsType.UnsignedInt, 0);
+
+            /*            GL.ClearStencil(0);
+                        GL.Clear(ClearBufferMask.StencilBufferBit);
+                        GL.StencilMask(0);
+
+                        // Render the mesh into the stencil buffer.
+                        GL.Enable(EnableCap.StencilTest);
+                        GL.StencilFunc(StencilFunction.Always, 1, -1);
+                        GL.StencilOp(StencilOp.Keep, StencilOp.Keep, StencilOp.Replace);
+                        GL.DrawElements(PrimitiveType.Triangles, mesh.indices.Length, DrawElementsType.UnsignedInt, 0);
+
+                        // Render the thick wireframe version.
+                        GL.StencilFunc(StencilFunction.Notequal, 1, -1);
+                        GL.StencilOp(StencilOp.Keep, StencilOp.Keep, StencilOp.Replace);
+                        GL.LineWidth(10);
+                        GL.PolygonMode(MaterialFace.Front, PolygonMode.Line);
+                        GL.DrawElements(PrimitiveType.Triangles, mesh.indices.Length, DrawElementsType.UnsignedInt, 0);*/
+
         }
 
         Mesh loadMesh(string meshDir)
@@ -85,7 +105,7 @@ namespace CelsteEngine
 
         Shader loadShader()
         {
-            return new Shader("testassets/shader.vert", "testassets/shader.frag");
+            return new Shader("engineassets/shader.vert", "engineassets/shader.frag");
         }
     }
 }

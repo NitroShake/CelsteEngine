@@ -14,7 +14,7 @@ namespace CelsteEngine
         public static bool checkPointSphereOverlap(Vector3 point, SphereCollider c)
         {
             float distance = Vector3.Distance(c.position, point);
-            Console.WriteLine(point);
+            //Console.WriteLine(point);
             return distance < c.radius;
         }
 

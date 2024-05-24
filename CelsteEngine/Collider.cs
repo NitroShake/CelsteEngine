@@ -51,7 +51,7 @@ namespace CelsteEngine
             }
             if (collidingObject != null)
             {
-                Console.WriteLine("collider");
+                //Console.WriteLine("collider");
                 resolveCollision(collidingObject, targetPos - position, stepsTaken > 1 && position != targetPos);
             }
         }
