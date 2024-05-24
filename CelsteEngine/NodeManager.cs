@@ -13,5 +13,6 @@ namespace CelsteEngine
         public static CelsteGame game;
         public static Node3D masterNode;
         public static Camera activeCamera;
+        public static DirectionalLight activeLight = null;
     }
 }
