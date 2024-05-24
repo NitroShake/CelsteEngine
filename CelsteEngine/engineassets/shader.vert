@@ -6,6 +6,7 @@ uniform mat4 view;
 uniform mat4 projection;
 
 layout(location = 1) in vec2 aTexCoord;
+layout(location = 2) in vec3 aNormal;
 
 out vec2 texCoord;
 

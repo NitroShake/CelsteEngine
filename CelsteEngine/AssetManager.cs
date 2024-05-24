@@ -52,6 +52,7 @@ namespace CelsteEngine
         {
             List<float> vertexes = new List<float>();
             List<float> texCoords = new List<float>();
+            List<float> normals = new List<float>();
             List<string[]> faceDetails = new List<string[]>();
             StreamReader sr = new StreamReader(dir);
             for (string line = sr.ReadLine(); line != null; line = sr.ReadLine())
@@ -73,8 +74,13 @@ namespace CelsteEngine
                     texCoords.Add(float.Parse(splitLine[1]));
                     texCoords.Add(float.Parse(splitLine[2]));
                 }
+                else if (splitLine[0] == "vn")
+                {
+                    normals.Add(float.Parse(splitLine[1]));
+                    normals.Add(float.Parse(splitLine[2]));
+                    normals.Add(float.Parse(splitLine[3]));
+                }
             }
-
             List<float> vertexData = new();
             List<uint> indices = new List<uint>();
 
@@ -91,18 +97,23 @@ namespace CelsteEngine
                     string[] splitFace = face[i].Split('/');
                     int vertexIndex = int.Parse(splitFace[0]) - 1;
                     int textureCoordIndex = int.Parse(splitFace[1]) - 1;
+                    int normalIndex = int.Parse(splitFace[2]) - 1;
                     potentialVertexData.AddRange(vertexes.GetRange(vertexIndex * 3, 3));
                     potentialVertexData.AddRange(texCoords.GetRange(textureCoordIndex * 2, 2));
+                    potentialVertexData.AddRange(normals.GetRange(normalIndex * 3, 3));
 
                     bool vertexDataAlreadyUsed = false;
                     uint vertexStartingIndex = 0;
-                    for (int j = 0; j < vertexData.Count; j+=5)
+                    for (int j = 0; j < vertexData.Count; j+=8)
                     {
                         if (potentialVertexData[0] == vertexData[j]
                             && potentialVertexData[1] == vertexData[j+1]
                             && potentialVertexData[2] == vertexData[j+2]
                             && potentialVertexData[3] == vertexData[j+3]
-                            && potentialVertexData[4] == vertexData[j+4])
+                            && potentialVertexData[4] == vertexData[j+4]
+                            && potentialVertexData[5] == vertexData[j+5]
+                            && potentialVertexData[6] == vertexData[j+6]
+                            && potentialVertexData[7] == vertexData[j+7])
                         {
                             vertexDataAlreadyUsed = true;
                             vertexStartingIndex = (uint)j;
@@ -114,7 +125,7 @@ namespace CelsteEngine
                         vertexData.AddRange(potentialVertexData);
                     }
 
-                    indices.Add(vertexStartingIndex / 5);
+                    indices.Add(vertexStartingIndex / 8);
                 }
 
             }

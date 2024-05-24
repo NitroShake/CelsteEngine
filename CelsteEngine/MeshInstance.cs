@@ -46,11 +46,15 @@ namespace CelsteEngine
 
             int vertexPos = shader.getAttributeLocation("aPosition");
             GL.EnableVertexAttribArray(vertexPos);
-            GL.VertexAttribPointer(vertexPos, 3, VertexAttribPointerType.Float, false, 5 * sizeof(float), 0);
+            GL.VertexAttribPointer(vertexPos, 3, VertexAttribPointerType.Float, false, 8 * sizeof(float), 0);
 
             var texCoordLocation = shader.getAttributeLocation("aTexCoord");
             GL.EnableVertexAttribArray(texCoordLocation);
-            GL.VertexAttribPointer(texCoordLocation, 2, VertexAttribPointerType.Float, false, 5 * sizeof(float), 3 * sizeof(float));
+            GL.VertexAttribPointer(texCoordLocation, 2, VertexAttribPointerType.Float, false, 8 * sizeof(float), 3 * sizeof(float));
+
+            var normalPos = shader.getAttributeLocation("aNormal");
+            GL.EnableVertexAttribArray(normalPos);
+            GL.VertexAttribPointer(normalPos, 3, VertexAttribPointerType.Float, false, 8 * sizeof(float), 5 * sizeof(float));
         }
 
         internal override void draw()
