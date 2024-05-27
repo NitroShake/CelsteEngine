@@ -13,6 +13,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="engineassets\litshader.frag">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="engineassets\outline.frag">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

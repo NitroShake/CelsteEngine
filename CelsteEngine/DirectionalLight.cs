@@ -9,12 +9,23 @@ namespace CelsteEngine
 {
     public class DirectionalLight : Node3D
     {
-        public DirectionalLight(bool startActive, Vector3 position, Vector3 rotation, Vector3 scale, bool inheritTransform, List<Node> children = null, Node? parent = null) : base(position, rotation, scale, inheritTransform, children, parent)
+        public float ambient;
+        public float diffuse;
+        public float specular;
+        public DirectionalLight(bool startActive, float specular, float diffuse, float ambient, Vector3 rotation, List<Node> children = null, Node? parent = null) : base(new Vector3(), rotation, new Vector3(), false, children, parent)
         {
+            this.ambient = ambient;
+            this.diffuse = diffuse;
+            this.specular = specular;
             if (startActive)
             {
                 NodeManager.activeLight = this;
             }
+        }
+
+        public Vector3 getDirection()
+        {
+            return Quaternion.FromEulerAngles(rotation) * new Vector3(0,0,1);
         }
     }
 }

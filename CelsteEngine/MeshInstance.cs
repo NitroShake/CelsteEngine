@@ -107,7 +107,7 @@ namespace CelsteEngine
             );  
         }
 
-        Shader loadShader()
+        protected virtual Shader loadShader()
         {
             return new Shader("engineassets/shader.vert", "engineassets/shader.frag");
         }

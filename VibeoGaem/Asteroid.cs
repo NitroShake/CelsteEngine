@@ -17,7 +17,7 @@ namespace VibeoGaem
         public Asteroid(Vector3 position, Vector3 rotation, Vector3 scale, bool inheritTransform, List<Node> children, Node? parent) : base(position, rotation, new Vector3(2.25f, 2.25f, 2.25f), inheritTransform, children, parent)
         {
             health = 5;
-            mesh = new MeshInstance("assets/asteroidtest.obj", "assets/asteroiddiffuse.png", new Vector3(5, 0, 0), new Vector3(0, 0, 0), new Vector3(0, 0, 0), false, new List<Node>(), null, new Color4(255, 255, 255, 255));
+            mesh = new LitMeshInstance("assets/asteroidtest.obj", "assets/asteroiddiffuse.png", new Vector3(5, 0, 0), new Vector3(0, 0, 0), new Vector3(0, 0, 0), false, new List<Node>(), null, new Color4(255, 255, 255, 255));
             addChild(mesh);
             Random random = new Random();
             direction = new Vector3((float)(random.NextDouble() - 0.5), 0, (float)(random.NextDouble() - 0.5)).Normalized();

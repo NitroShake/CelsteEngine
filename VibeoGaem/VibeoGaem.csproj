@@ -31,6 +31,12 @@
     <None Update="assets\asteroidtest.obj">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="assets\background.obj">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="assets\background.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="assets\cone.mtl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

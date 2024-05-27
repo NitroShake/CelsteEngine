@@ -79,7 +79,7 @@ namespace VibeoGaem
             if (NodeManager.game.IsMouseButtonDown(MouseButton.Left) && projectileTimer > projectileInterval)
             {
                 Vector3 direction = new Vector3(mouseY, 0, -mouseX).Normalized();
-                addChild(new Projectile("assets/player.png", 10, direction, position + direction * 1.5f, new Vector3(0,0,0), new Vector3(0.5f,0.5f,0.5f), false, new List<Node>(), null));
+                addChild(new Projectile("assets/player.png", 13, direction, position + direction * 1.5f, new Vector3(0,0,0), new Vector3(0.5f,0.5f,0.5f), false, new List<Node>(), null));
                 projectileTimer = 0;
             }
             float rotation = (float)(Math.Atan2(mouseY, mouseX));

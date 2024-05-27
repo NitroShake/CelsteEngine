@@ -26,6 +26,8 @@ namespace VibeoGaem
             AssetManager.loadTexture("assets/asteroiddiffuse.png");
             random = new Random();
             player = new Player(new Vector3(0, 0, 0), new Vector3(0, 0, 0), new Vector3(1f, 1f, 1f), false, new List<Node>(), null);
+            addChild(new DirectionalLight(true, 0.3f, 0.75f, 0.2f, new Vector3(90, 0, 0), null, null));
+            addChild(new MeshInstance("assets/background.obj", "assets/background.png", new Vector3(0, -10, 0), new Vector3(0, 0, 0),new Vector3(1,1,1), false, null, null, new Color4(255,255,255,255)));
             addChild(player);
         }
 
