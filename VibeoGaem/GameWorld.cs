@@ -34,8 +34,8 @@ namespace VibeoGaem
         public override void onUpdate(double deltaTime)
         {
             base.onUpdate(deltaTime);
-            entityMaxTimer = Math.Log(player.score + 10);
-            asteroidMaxTimer = Math.Log(player.score + 10);
+            entityMaxTimer = Math.Max(6 - Math.Log(player.score + 10), 0);
+            asteroidMaxTimer = Math.Max(5 - Math.Log(player.score + 10), 0);
 
             entityTimer += deltaTime;
             if (entityTimer > entityMaxTimer)

@@ -36,7 +36,7 @@ namespace VibeoGaem
 
             if (projectileTimer > projectileInterval) 
             {
-                addChild(new Projectile("testassets/test2.png", 5, directionToTarget, position + (directionToTarget * 1.5f), new Vector3(0, 0, 0), new Vector3(0.5f, 0.5f, 0.5f), false, new List<Node>(), null));
+                addChild(new Projectile(new Color4(255,0,0,255), 5, directionToTarget, position + (directionToTarget * 1.5f), new Vector3(0, 0, 0), new Vector3(0.5f, 0.5f, 0.5f), false, new List<Node>(), null));
                 projectileTimer = 0;
             }
 

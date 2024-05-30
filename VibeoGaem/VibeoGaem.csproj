@@ -52,6 +52,9 @@
     <None Update="assets\enemE.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="assets\plain.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="assets\player.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

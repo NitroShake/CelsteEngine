@@ -20,7 +20,7 @@ namespace VibeoGaem
         {
             position = targetPlayer.position;
             position.X -= 1.75f;
-            position.Y += 40;
+            position.Y += 35;
             pitch = -90f;
 
         }

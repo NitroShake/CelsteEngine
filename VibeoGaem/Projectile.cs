@@ -14,11 +14,11 @@ namespace VibeoGaem
         MeshInstance mesh;
         Entity owner;
 
-        public Projectile(string texture, float speed, Vector3 direction, Vector3 position, Vector3 rotation, Vector3 scale, bool inheritTransform, List<Node> children, Entity? parent) : base(position, rotation, scale, inheritTransform, children, parent)
+        public Projectile(Color4 color, float speed, Vector3 direction, Vector3 position, Vector3 rotation, Vector3 scale, bool inheritTransform, List<Node> children, Entity? parent) : base(position, rotation, scale, inheritTransform, children, parent)
         {
             id = 1;
             ignoreIds.Add(id);
-            mesh = new MeshInstance("assets/projectile.obj", texture, position, rotation, scale, false, new List<Node>(), null, new Color4(255, 255, 255, 255));
+            mesh = new MeshInstance("assets/projectile.obj", "assets/plain.png", position, rotation, scale, false, new List<Node>(), null, color);
             this.children = new Node[]
             {
                 mesh
