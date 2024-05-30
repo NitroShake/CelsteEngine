@@ -17,20 +17,20 @@ namespace CelsteEngine
         public OutlinedMeshInstance(Color4 outlineColor, string meshDir, string textureDir, Vector3 position, Vector3 rotation, Vector3 scale, bool inheritTransform, List<Node> children = null, Node? parent = null, Color4? color = null) : base(meshDir, textureDir, position, rotation, scale, inheritTransform, children, parent, color)
         {
             this.outlinecolor = outlineColor;
-            outlineShader = new Shader("engineassets/shader.vert", "engineassets/outline.frag");
+            outlineShader = AssetManager.loadShader("engineassets/shader.vert", "engineassets/outline.frag");
         }
 
         internal override void draw()
         {
-            shader.Use();
+            shader.use();
             GL.StencilFunc(StencilFunction.Always, 1, 0xFF);
             GL.StencilMask(0xFF);
 
             GL.BindVertexArray(vao);
             var model = Matrix4.CreateFromQuaternion(Quaternion.FromEulerAngles(rotation)) * Matrix4.CreateTranslation(position);
             shader.SetMatrix4("model", model);
-            shader.SetMatrix4("view", NodeManager.activeCamera.GetViewMatrix());
-            shader.SetMatrix4("projection", NodeManager.activeCamera.GetProjectionMatrix());
+            shader.SetMatrix4("view", NodeManager.activeCamera.getViewMatrix());
+            shader.SetMatrix4("projection", NodeManager.activeCamera.getProjectionMatrix());
             int handle = shader.getHandle();
             GL.Uniform3(GL.GetUniformLocation(handle, "viewPos"), NodeManager.activeCamera.position);
 
@@ -50,7 +50,7 @@ namespace CelsteEngine
             GL.DrawElements(PrimitiveType.Triangles, mesh.indices.Length, DrawElementsType.UnsignedInt, 0);
             GL.BindTexture(TextureTarget.Texture2D, 0);
 
-            outlineShader.Use();
+            outlineShader.use();
             GL.StencilFunc(StencilFunction.Notequal, 1, 0xFF);
             GL.StencilMask(0x00);
             //GL.Disable(EnableCap.DepthTest);
@@ -58,8 +58,8 @@ namespace CelsteEngine
             float outlineScale = 1.1f;
             model = Matrix4.CreateFromQuaternion(Quaternion.FromEulerAngles(rotation)) * Matrix4.CreateScale(outlineScale) * Matrix4.CreateTranslation(position);
             outlineShader.SetMatrix4("model", model);
-            outlineShader.SetMatrix4("view", NodeManager.activeCamera.GetViewMatrix());
-            outlineShader.SetMatrix4("projection", NodeManager.activeCamera.GetProjectionMatrix());
+            outlineShader.SetMatrix4("view", NodeManager.activeCamera.getViewMatrix());
+            outlineShader.SetMatrix4("projection", NodeManager.activeCamera.getProjectionMatrix());
             GL.Uniform4(GL.GetUniformLocation(outlineShader.getHandle(), "color"), outlinecolor);
             GL.DrawElements(PrimitiveType.Triangles, mesh.indices.Length, DrawElementsType.UnsignedInt, 0);
             
@@ -71,7 +71,7 @@ namespace CelsteEngine
         }
         protected override Shader loadShader()
         {
-            return new Shader("engineassets/shader.vert", "engineassets/litshader.frag");
+            return AssetManager.loadShader("engineassets/shader.vert", "engineassets/litshader.frag");
         }
 
     }

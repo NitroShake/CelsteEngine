@@ -35,7 +35,7 @@ namespace CelsteEngine
             ebo = GL.GenBuffer();
 
             shader = loadShader();
-            shader.Use();
+            shader.use();
 
             GL.BindVertexArray(vao);
             GL.BindBuffer(BufferTarget.ArrayBuffer, vbo);
@@ -61,11 +61,11 @@ namespace CelsteEngine
         {
             GL.StencilMask(0x00);
             GL.BindVertexArray(vao);
-            shader.Use();
+            shader.use();
             var model = Matrix4.CreateFromQuaternion(Quaternion.FromEulerAngles(rotation)) * Matrix4.CreateTranslation(position);
             shader.SetMatrix4("model", model);
-            shader.SetMatrix4("view", NodeManager.activeCamera.GetViewMatrix());
-            shader.SetMatrix4("projection", NodeManager.activeCamera.GetProjectionMatrix());
+            shader.SetMatrix4("view", NodeManager.activeCamera.getViewMatrix());
+            shader.SetMatrix4("projection", NodeManager.activeCamera.getProjectionMatrix());
             GL.Uniform4(GL.GetUniformLocation(shader.getHandle(), "color"), color);
             GL.ActiveTexture(TextureUnit.Texture0);
             GL.BindTexture(TextureTarget.Texture2D, texture);
@@ -109,7 +109,7 @@ namespace CelsteEngine
 
         protected virtual Shader loadShader()
         {
-            return new Shader("engineassets/shader.vert", "engineassets/shader.frag");
+            return AssetManager.loadShader("engineassets/shader.vert", "engineassets/shader.frag");
         }
     }
 }

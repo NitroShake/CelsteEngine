@@ -10,8 +10,8 @@ namespace VibeoGaem
 {
     internal class PlayerCamera : Camera
     {
-        Node3D targetPlayer;
-        public PlayerCamera(Vector3 position, Vector3 rotation, Vector3 scale, bool inheritTransform, List<Node> children, Node? parent, float aspectRatio, bool startActive, Node3D targetPlayer) : base(position, rotation, scale, inheritTransform, children, parent, aspectRatio, startActive)
+        Player targetPlayer;
+        public PlayerCamera(Vector3 position, Vector3 rotation, Vector3 scale, bool inheritTransform, List<Node> children, Node? parent, float aspectRatio, bool startActive, Player targetPlayer) : base(position, rotation, scale, inheritTransform, children, parent, aspectRatio, startActive)
         {
             this.targetPlayer = targetPlayer;
         }
@@ -21,7 +21,7 @@ namespace VibeoGaem
             position = targetPlayer.position;
             position.X -= 1.75f;
             position.Y += 40;
-            Pitch = -90f;
+            pitch = -90f;
 
         }
 

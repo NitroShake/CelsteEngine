@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Class Name="CelsteEngine.AssetManager">
+    <Position X="11.75" Y="7.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQCABEgAAAAAAAAAAAECgAAACAACAAAAAAAAAAA=</HashCode>
+      <FileName>AssetManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CelsteEngine.Camera">
+    <Position X="4.25" Y="7.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAgAgAQAAAAAEAAAgABACBAAAAEAgIgAgAoAAgBA=</HashCode>
+      <FileName>Camera.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CelsteEngine.CelsteGame">
+    <Position X="12.25" Y="4" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAIBAAgAAAAAAAAAQAAAAAACAAAAACAAAAAAAAAAAAA=</HashCode>
+      <FileName>CelsteGame.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CelsteEngine.Collider">
+    <Position X="14" Y="7.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAATgAAAAAAACAAAAAAQQAAAAAAAAAgA=</HashCode>
+      <FileName>Collider.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CelsteEngine.CollisionDetector">
+    <Position X="16.5" Y="7.5" Width="2.75" />
+    <Members>
+      <Method Name="checkAabbAabbOverlap" Hidden="true" />
+      <Method Name="checkPointAabbOverlap" Hidden="true" />
+      <Method Name="checkSphereAabbOverlap" Hidden="true" />
+      <Method Name="handleObbSphere" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AECACAABAAAAAAAAAAAAAAAAAAAABAAAAAgAAAAAAAA=</HashCode>
+      <FileName>CollisionDetector.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CelsteEngine.DirectionalLight">
+    <Position X="7.25" Y="7.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAgAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAABAAAA=</HashCode>
+      <FileName>DirectionalLight.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CelsteEngine.LitMeshInstance">
+    <Position X="11.25" Y="14.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>LitMeshInstance.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CelsteEngine.Mesh">
+    <Position X="12" Y="11" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Mesh.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CelsteEngine.MeshInstance">
+    <Position X="10" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAICAAAAIAEAAAAIAAAACAAABAgCAAAAAAEAAAAA=</HashCode>
+      <FileName>MeshInstance.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="shader" />
+      <Field Name="mesh" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="CelsteEngine.Node">
+    <Position X="7" Y="3.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAIAAAARgABAAAAAACAAAAAAAAAAAAAgEAAI=</HashCode>
+      <FileName>Node.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CelsteEngine.Node3D">
+    <Position X="9.75" Y="4.5" Width="2" />
+    <Members>
+      <Field Name="inheritTransform" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAACCAIAACAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Node3D.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CelsteEngine.NodeManager">
+    <Position X="14.75" Y="4.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAAAAAABAAAAAAAABAABAAIAAAAAAAAACA=</HashCode>
+      <FileName>NodeManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CelsteEngine.OutlinedMeshInstance">
+    <Position X="8.5" Y="14.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAAAAAAAAMAAAAAAAAAAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>OutlinedMeshInstance.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CelsteEngine.Shader" BaseTypeListCollapsed="true">
+    <Position X="7.25" Y="10.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAACAAAAAgAAAAAABAAAAAAAAAJAACAgAAAAA=</HashCode>
+      <FileName>Shader.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="CelsteEngine.SphereCollider">
+    <Position X="14" Y="11" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAAAAABAAAAAAAAAAAAAAAAQAAAAAAAAAAA=</HashCode>
+      <FileName>SphereCollider.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CelsteEngine.VisualNode">
+    <Position X="10" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAgAAIAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>VisualNode.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -19,14 +19,14 @@ namespace CelsteEngine
         {
             GL.StencilMask(0x00);
             GL.BindVertexArray(vao);
-            shader.Use();
+            shader.use();
             GL.ActiveTexture(TextureUnit.Texture0);
             GL.BindTexture(TextureTarget.Texture2D, texture);
             int handle = shader.getHandle();
             var model = Matrix4.CreateFromQuaternion(Quaternion.FromEulerAngles(rotation)) * Matrix4.CreateTranslation(position);
             shader.SetMatrix4("model", model);
-            shader.SetMatrix4("view", NodeManager.activeCamera.GetViewMatrix());
-            shader.SetMatrix4("projection", NodeManager.activeCamera.GetProjectionMatrix());
+            shader.SetMatrix4("view", NodeManager.activeCamera.getViewMatrix());
+            shader.SetMatrix4("projection", NodeManager.activeCamera.getProjectionMatrix());
             GL.Uniform3(GL.GetUniformLocation(handle, "viewPos"), NodeManager.activeCamera.position);
 
             GL.Uniform1(GL.GetUniformLocation(handle, "material.diffuse"), 0);
@@ -46,7 +46,7 @@ namespace CelsteEngine
 
         protected override Shader loadShader()
         {
-            return new Shader("engineassets/shader.vert", "engineassets/litshader.frag");
+            return AssetManager.loadShader("engineassets/shader.vert", "engineassets/litshader.frag");
         }
     }
 }

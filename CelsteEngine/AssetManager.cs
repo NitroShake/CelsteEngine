@@ -13,6 +13,7 @@ namespace CelsteEngine
     {
         public static Dictionary<string, Mesh> meshes = new();
         public static Dictionary<string, int> textures = new();
+        public static Dictionary<string, Shader> shaders = new();
 
         /// <summary>
         /// Removes the mesh from the AssetManager dictionary. The mesh will still remain in memory if referenced by other objects.
@@ -180,6 +181,20 @@ namespace CelsteEngine
             //texture mipmaps
             GL.GenerateMipmap(GenerateMipmapTarget.Texture2D);
             return handle;
+        }
+        public static Shader loadShader(string vertDir, string fragDir)
+        {
+            string dir = vertDir + fragDir;
+            if (shaders.ContainsKey(dir))
+            {
+                return shaders[dir];
+            }
+            else
+            {
+                Shader shader = new Shader(vertDir, fragDir);
+                shaders.Add(dir, shader);
+                return shader;
+            }
         }
     }
 }

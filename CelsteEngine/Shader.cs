@@ -12,8 +12,6 @@ namespace CelsteEngine
     public class Shader : IDisposable
     {
         int handle;
-        string debugVert = "";
-        string debugFrag = "";
 
         public int getHandle()
         {
@@ -22,7 +20,7 @@ namespace CelsteEngine
 
         private bool disposedValue = false;
 
-        protected virtual void Dispose(bool disposing)
+        protected virtual void dispose()
         {
             if (!disposedValue)
             {
@@ -34,18 +32,14 @@ namespace CelsteEngine
 
         ~Shader()
         {
-            if (disposedValue == false)
-            {
-                Console.WriteLine("GPU Resource leak! Did you forget to call Dispose()?");
-            }
+            dispose();
         }
         public void Dispose()
         {
-            Dispose(true);
-            GC.SuppressFinalize(this);
+            dispose();
         }
 
-        public void Use()
+        public void use()
         {
             GL.UseProgram(handle);
         }
@@ -61,11 +55,10 @@ namespace CelsteEngine
             GL.UniformMatrix4(GL.GetUniformLocation(handle, name), true, ref data);
         }
 
+
         public Shader(string vertexPath, string fragmentPath)
         {
             //read and create shaders
-            debugFrag = fragmentPath;
-            debugVert = vertexPath;
             string vertexShaderSource = File.ReadAllText(vertexPath);
             string fragmentShaderSource = File.ReadAllText(fragmentPath);
 

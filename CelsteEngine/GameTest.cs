@@ -58,7 +58,7 @@ namespace CelsteEngine
             GL.EnableVertexAttribArray(0);
 
             shader = new Shader("shader.vert", "shader.frag");
-            shader.Use();
+            shader.use();
 
             GL.Enable(EnableCap.DepthTest);
 
@@ -101,7 +101,7 @@ namespace CelsteEngine
             int vertexColorLocation = GL.GetUniformLocation(shader.getHandle(), "color");
             GL.Uniform4(vertexColorLocation, 0.0f, greenValue, 0.0f, 1.0f);
 
-            shader.Use();
+            shader.use();
 
             GL.BindVertexArray(VertexArrayObject);
 
